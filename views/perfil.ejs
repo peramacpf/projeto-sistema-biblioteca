@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Usuário</title>
+</head>
+<body>
+  <h1>Bem-vindo, <%= userName %>!</h1>
+  <p>Esta é sua página de perfil. Você pode visualizar os Livros Cadastrados. </p>
+  <h2> Livros Disponíveis </h2>
+  <form id="pesquisarLivro" action="/pesquisarLivros" method="GET"> 
+    <input type="text" id="searchInput" name="termoPesquisar" placeholder="Pesquisar livros...">
+    <button type="submit">Pesquisar</button>
+  </form>
+  <table border="1" cellpadding="10">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Gênero</th>
+        <th>Descrição</th>
+        <th>Data de Lançamento</th>
+        <th>Imagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% livros.forEach(livro => { %>
+        <tr>
+          <td><%= livro.id_livro %></td>
+          <td><%= livro.titulo %></td>
+          <td><%= livro.autor %></td>
+          <td><%= livro.genero %></td>
+          <td><%= livro.descricao %></td>
+          <td><%= livro.data_lanc %></td>
+          <td>
+            <% if (livro.imagem) { %>
+              <img src="/uploads/<%= livro.imagem %>" width="200" height="300" alt="Imagem do Livro">
+            <% } else { %>
+              Sem imagem
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <a href="/logout">Logout</a>
+</body>
+</html>
